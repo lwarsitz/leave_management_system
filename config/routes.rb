@@ -1,6 +1,14 @@
 # Plugin's routes
 # See: http://guides.rubyonrails.org/routing.html
 
+get 'lms_calendars/show', to: 'lms_calendars#show'
+#match 'lms_calendars/show', :via => :get, :to => 'lms_calendars#show', :as => 'lms_calendars_path'
+
+#resources :lms_calendar do
+#  get 'show'
+#end
+#match '/lms_calendars', :via => :get, :to => 'lms_calendar#show', :as => 'lms_calendar_path' 
+
 resources :lms_settings do
   collection do
     get 'generate_leave_history'

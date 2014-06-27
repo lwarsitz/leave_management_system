@@ -7,6 +7,7 @@
     <% if LeaveManagementSystem.allowed_to?(@employee, LeaveManagementSystem::ROLES[:dt]) || LeaveManagementSystem.allowed_to?(@employee, LeaveManagementSystem::ROLES[:rt]) %>
       <li class="<%= controller_name=='lms_reports' ? 'active' : '' %>"><%= link_to(l(:label_lms_report), ytd_lms_reports_path) %></li>
     <% end %>
+    	<li class="<%= controller_name=='lms_calendars' ? 'active' : '' %>"><%= link_to(l(:label_lms_calendar), :controller => :lms_calendars, :action => :show) %></li>
   </ul>
 </div>
 
