@@ -10,11 +10,20 @@ while day <= calendar.enddt %>
 <td class="<%= day.month==calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>" id="<%= day %>">
 <p class="day-num"><%= day.day %></p>
 
+<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-0' + day.month.to_s + '-' + day.day.to_s + '%']) %>
+<% occ_str = occ.to_s %>
+
 <script type="text/javascript">
-	var date = "<%= day %>"
-	var public_holidays = "<%= @public_holidays %>"		
-	if(public_holidays.toString().indexOf(date.toString()) > -1){
+	var date = "<%= day %>";
+	var public_holidays = "<%= @public_holidays %>";
+	var ph_occ = "<%= occ_str %>";
+	
+	ph_occ = ph_occ.replace("[#&lt;LmsPublicHoliday occ_name: &quot;","");
+	ph_occ = ph_occ.replace("&quot;&gt;]","");
+	
+	if(public_holidays.toString().indexOf(date) > -1){
 		$("#"+date).css("background-color","#FF9933");
+		$("#"+date).append(ph_occ);
 	}
 </script>
 
