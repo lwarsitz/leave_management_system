@@ -10,7 +10,20 @@ while day <= calendar.enddt %>
 <td class="<%= day.month==calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>" id="<%= day %>">
 <p class="day-num"><%= day.day %></p>
 
-<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-0' + day.month.to_s + '-' + day.day.to_s + '%']) %>
+<% occ = "" %>
+<% if(day.month.to_i < 10) %>
+	<% if(day.day.to_i < 10) %>
+		<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-0' + day.month.to_s + '-0' + day.day.to_s + '%']) %>
+	<% else %>
+		<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-0' + day.month.to_s + '-' + day.day.to_s + '%']) %>
+	<% end %>	
+<% else %>
+	<% if(day.day.to_i < 10) %>
+		<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-' + day.month.to_s + '-0' + day.day.to_s + '%']) %>
+	<% else %>
+		<% occ = LmsPublicHoliday.find(:all, :select => "occ_name", :conditions => ["ph_date LIKE ?", '%' + day.year.to_s + '-' + day.month.to_s + '-' + day.day.to_s + '%']) %>
+	<% end %>
+<% end %>
 <% occ_str = occ.to_s %>
 
 <script type="text/javascript">
