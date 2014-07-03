@@ -9,6 +9,8 @@ class LmsCalendarsController < ApplicationController
   helper :sort
   include SortHelper
   
+  before_filter :lms_authorize
+  
   def create  
   end
 

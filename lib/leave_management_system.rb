@@ -44,7 +44,7 @@ module LeaveManagementSystem
     def lms_authorize
       user = User.current
       authorized = case controller_name
-	when 'lms_dashboards'
+	when 'lms_dashboards', 'lms_calendars'
           LeaveManagementSystem.allowed_to?(user, LeaveManagementSystem::ROLES[:al]) || LeaveManagementSystem.allowed_to?(user, LeaveManagementSystem::ROLES[:ar]) || LeaveManagementSystem.allowed_to?(user, LeaveManagementSystem::ROLES[:dt]) || LeaveManagementSystem.allowed_to?(user, LeaveManagementSystem::ROLES[:rt])
 	when 'lms_settings', 'lms_leave_accounts'
 	  LeaveManagementSystem.allowed_to?(user, LeaveManagementSystem::ROLES[:dt])
