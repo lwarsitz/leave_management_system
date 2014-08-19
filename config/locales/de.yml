@@ -1,0 +1,21 @@
+# German strings go here for Rails i18n
+de:
+ label_lms_calendar: Kalender
+ label_leave_management_system: Leave Management System
+ label_lms_dashboard: Dashboard
+ label_lms_settings: Einstellungen
+ label_lms_report: Übersicht
+ field_reported_to: Reporting Manager
+ field_notificants: Benachrichtiger
+ field_from_date: Startdatum
+ field_to_date: Enddatum
+ field_no_of_days: Anzahl der Tage
+ field_reason: Grund
+ field_ded_carry_forward: ''
+ field_days: Tage
+ field_period: Intervall
+ field_lop: LOP
+ field_leave_category: Typ
+ field_occ_name: Name des Anlasses
+ field_ph_date: Datum
+ button_process: Weiter

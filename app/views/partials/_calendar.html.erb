@@ -30,6 +30,48 @@ while day <= calendar.enddt %>
 	var date = "<%= day %>";
 	var public_holidays = "<%= @public_holidays %>";
 	var ph_occ = "<%= occ_str %>";
+	var leave = "";
+	var user_admin = "<%= User.current.admin %>";
+	
+	if(user_admin == "true"){
+		"<%= r_leave = LmsLeave.find(:all, :select => ["leave_dates_object", "user_id"]) %>";	
+		leave = "<%= r_leave %>";
+		
+		var own_leave = "<%= LmsLeave.find(:all, :select => "leave_dates_object", :conditions => ["user_id LIKE ?", User.current.id]) %>";	
+		
+		"<%= r_ll = LmsLeave.find(:all, :select => "user_id") %>";
+		"<%= r_ll_scan = r_ll %>";
+		"<%= r_ll_scan = r_ll_scan.to_s.scan(/\d/).join("") %>";
+		console.log("<%= r_ll_scan %>");
+		
+		if(leave.toString().indexOf(date) > -1){
+			
+			console.log("OOO: " + "<%= r_leave.to_s %>");
+			
+			console.log("<%= Employee.find(:all, :select => ["firstname", "lastname"], :conditions => ["id LIKE ?", r_ll_scan]) %>");
+			var r_ll_user = "<%= Employee.find(:all, :select => ["firstname", "lastname"], :conditions => ["id LIKE ?", r_ll_scan]) %>";
+			var ll_user = r_ll_user;
+			ll_user = ll_user.replace('[#<Employee firstname: "', '');
+			ll_user = ll_user.replace('", lastname: "', ' ');
+			ll_user = ll_user.replace('">]','');
+			
+			$("#"+date).css("background-color","#CCFFFF");
+			$("#"+date).append("LEAVE : " + ll_user);
+		}
+		if(own_leave.toString().indexOf(date) > -1){
+			$("#"+date).css("background-color","#00FFCC");
+			$("#"+date).append("OWN LEAVE!");
+		}
+	}else{
+		leave = "<%= LmsLeave.find(:all, :select => "leave_dates_object", :conditions => ["user_id LIKE ?", User.current.id]) %>";
+		if(leave.toString().indexOf(date) > -1){
+			$("#"+date).css("background-color","#33FF99");
+			$("#"+date).append("LEAVE!");
+		}
+	}
+	
+	console.log(leave);
+	console.log("-------------------");
 	
 	ph_occ = ph_occ.replace("[#&lt;LmsPublicHoliday occ_name: &quot;","");
 	ph_occ = ph_occ.replace("&quot;&gt;]","");
